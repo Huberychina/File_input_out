@@ -5,6 +5,8 @@ public class File{
 		
 	System.out.println("file is good");	
 	System.out.println("file is good_add");	
+	System.out.println("file is good_add_newchange?");	
+	
 	}
 	
 	
