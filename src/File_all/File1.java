@@ -1,7 +1,6 @@
 package File_all;
 import java.io.*;
 
-import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 /* 思路介绍：
  * 1.首先我想建一个文件，这个文件如果存在我就直接读取数据，如果不存在，则进行创建
  * 2.如果文件不是空文件，则读取其中数据，之后，将文件清空；并将“I Love Java”写入，并输出提示“I have written appointed data”；
@@ -37,9 +36,9 @@ class File1{
 					//定义DataOutputStream类
 					DataOutputStream dos = new DataOutputStream(fos); //这样是为了将数据传入流中，相当于数据流的入口
 					
-					dos.writeUTF("I don't Love Java"); //这个地方只能英文，因为只有英语字母可以用一个字节来表示，其他汉字都会出现数据丢失
+					dos.writeUTF("I don't Love Java"); 
 					System.out.println("the file has been writteen");
-				
+					fos.close();
 					dos.close();
 					}catch(Exception e){
 						
@@ -49,15 +48,32 @@ class File1{
 					
 				} 
 				else{
-					System.out.println("the file's length is: "+f.length());
+					System.out.println("the file's length is: "+f.length()+"byte");
 					try{
-						//write data, use FileOutStream
+						//clear data
 						
 						FileOutputStream fos = new FileOutputStream(f,false);  //只能一个字节一个字节写入,替换掉原来的东西
 						//定义DataOutputStream类
 						DataOutputStream dos = new DataOutputStream(fos); //这样是为了将数据传入流中，相当于数据流的入口
 						
-						dos.writeUTF("I Love Java"); //这个地方只能英文，因为只有英语字母可以用一个字节来表示，其他汉字都会出现数据丢失
+						dos.write(new String("").getBytes()); //z这里就是为了清空文档
+						System.out.println("the file has been cleared，it is an empty file now");
+						fos.close();
+						dos.close();
+						}catch(Exception e){
+							
+							System.out.println("the file clear not correctly");
+							
+						}
+					
+					try{
+						//write data, use FileOutputStream
+						
+						FileOutputStream fos = new FileOutputStream(f,false);  //只能一个字节一个字节写入,替换掉原来的东西
+						//定义DataOutputStream类
+						DataOutputStream dos = new DataOutputStream(fos); //这样是为了将数据传入流中，相当于数据流的入口
+						
+						dos.writeUTF("I Love Java"); //这个地方读入字符串
 						System.out.println("the file has been writteen");
 						
 						dos.close();
@@ -66,7 +82,7 @@ class File1{
 							System.out.println("the file write not correctly");
 							
 						}
-					try{
+					try{  
 					//read data, use FileInputStream
 					
 						
@@ -82,24 +98,8 @@ class File1{
 						}catch(IOException e){
 							System.out.println("the file can't read correctly");
 						}
-					try{
-						//clear data
-						
-						FileOutputStream fos = new FileOutputStream(f,false);  //只能一个字节一个字节写入,替换掉原来的东西
-						//定义DataOutputStream类
-						DataOutputStream dos = new DataOutputStream(fos); //这样是为了将数据传入流中，相当于数据流的入口
-						
-						dos.write(new String("").getBytes()); //这个地方只能英文，因为只有英语字母可以用一个字节来表示，其他汉字都会出现数据丢失
-						System.out.println("the file has been cleared");
-						fos.close();
-						dos.close();
-						}catch(Exception e){
-							
-							System.out.println("the file clear not correctly");
-							
-						}
-					}
 					
+				}			
 	}
 	}
 	
