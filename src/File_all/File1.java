@@ -99,9 +99,55 @@ class File1{
 							System.out.println("the file can't read correctly");
 						}
 					
-				}			
+				}
+		System.out.println("****************the DataInputStream has ended,the BufferedWriter and BufferedReader start now***********");
+		try{  
+			//read data, use FileInputStream
+			
+				
+			FileOutputStream fos = new FileOutputStream(f);  //只能一个字节一个字节读
+			//定义DataOutputStream类
+			OutputStreamWriter osw = new OutputStreamWriter(fos); //这个是针对字符流，可以一个个输入字符
+			BufferedWriter bw = new BufferedWriter(osw); //这样是为了将数据传入流中，相当于数据流的入口，但是可以输入字符串，并用行来读出
+			System.out.println("please input the content that you want to show,end with new line <ok>");
+			
+			InputStreamReader isr = new InputStreamReader(System.in); //这样是为了将数据传入流中，相当于数据流的入口
+			BufferedReader br = new BufferedReader(isr);
+			while(true){
+			String temp = new String(br.readLine());
+			
+			if(temp.equals("ok")) break; //注意这个地方不能用等号，用equals
+			bw.write(temp);
+			bw.newLine();
+			}
+			bw.newLine();
+			System.out.println("the content from your keyboard has been written correctly");
+			bw.close();
+		
+				}catch(IOException e){
+					System.out.println("the file has not written correctly");
+				}
+		try{  
+			//read data, use FileInputStream
+			
+				
+			FileInputStream fis = new FileInputStream(f);  //只能一个字节一个字节读
+			//定义IutputStreamReader类
+			InputStreamReader isr = new InputStreamReader(fis); //这样是为了将数据传入流中，相当于数据流的入口
+			BufferedReader br = new BufferedReader(isr);
+			System.out.println("the file's content is: ");
+			//输出结果
+			String s;
+			while((s= br.readLine())!=null){
+			
+			System.out.println(s);
+			}
+			
+			br.close();
+		
+				}catch(IOException e){
+					System.out.println("the file can't read correctly");
+				}	
+		 
 	}
 	}
-	
-	
-	
